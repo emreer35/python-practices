@@ -227,7 +227,8 @@ for movie in movies:
     title_tag = movie.find('span',class_='title')
     year_tag = movie.find('span',class_='year')
     rating_tag = movie.find('span',class_='rating')
-    genre = movie.attrs['data-genre']
+    genre = movie.get('data-genre')
+    # genre = movie.attrs['data-genre']
 
 
     title = title_tag.get_text(strip=True) if title_tag else None
@@ -235,11 +236,14 @@ for movie in movies:
     rating_text = rating_tag.get_text(strip=True) if rating_tag else None
 
     try:
-        year = int(year_text)
-        rating = float(rating_text)
-    except(ValueError,TypeError):
-        year = None
+        rating = float(rating_text) if rating_text is not None else None
+    except (ValueError, TypeError):
         rating = None
+
+    try:
+        year = int(year_text) if year_text is not None else None
+    except (ValueError, TypeError):
+        year = None
 
     movies_list.append({
         "title" : title,
@@ -256,6 +260,52 @@ df = pd.DataFrame(movies_list)
 df.to_csv('movies.csv', index=False)
 
 
+# 4.3. Görev 2 – pandas ile küçük analiz
+# Aynı DataFrame üzerinde:
+# rating >= 8.7 olan filmleri seç ve yazdır.
+# Türlere göre ortalama rating hesapla:
+# df.groupby("genre")["rating"].mean()
+# En yüksek rating’li filmi bul:
+# idxmax() veya sort_values("rating", ascending=False).head(1)
+
+high_rating = df[df['rating'] >= 9]
+high_rating
+avg_rating = df.groupby('genre')['rating'].mean()
+avg_rating
+
+best_idx = df['genre'].idxmax()
+most_rating = df.loc[best_idx]
+most_rating
 
 
 
+# Aynı df üzerinde aşağıdakileri denemeni öneriyorum:
+# Sadece title ve genre sütunlarından oluşan yeni bir DataFrame oluştur.
+# Yılı 2000’den büyük olan filmleri filtrele.
+# Filmleri year sütununa göre artan, rating sütununa göre azalan şekilde sırala (önce yıl, sonra rating).
+# Her tür için:
+# kaç film var (count)
+# ortalama rating ne → tek groupby ile özet tablo oluştur.
+
+df2 = df[['title','genre']]
+df2
+
+year_filter = df[df['year'] > 2000]
+year_filter
+
+df.count()['title'] # bos olmayan kac title var
+
+avg = df.groupby('genre')['rating'].mean()
+avg
+
+sorted_values = df.sort_values(by=['year','rating'],ascending=[True,False])
+# year → True → küçükten büyüğe
+# rating → False → büyükten küçüğe
+sorted_values
+
+
+# agg
+
+summary = df.groupby('genre').agg(movie_count = ('title', 'count'),
+                                  avg_rating = ('rating', 'mean'))
+summary
