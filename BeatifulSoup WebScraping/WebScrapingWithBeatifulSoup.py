@@ -251,13 +251,9 @@ for movie in movies:
 movies_list
 
 df = pd.DataFrame(movies_list)
-df
+
 
 df.to_csv('movies.csv', index=False)
-
-
-
-
 
 
 
