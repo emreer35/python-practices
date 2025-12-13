@@ -1,0 +1,17 @@
+{
+  "Sci-Fi": {
+    "count": 2,
+    "best_title": "Inception",
+    "avg_rating": 8.7
+  },
+  "Action": {
+    "count": 2,
+    "best_title": "The Dark Knight",
+    "avg_rating": 8.75
+  },
+  "Drama": {
+    "count": 1,
+    "best_title": "Parasite",
+    "avg_rating": 8.6
+  }
+}

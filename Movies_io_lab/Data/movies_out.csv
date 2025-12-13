@@ -1,0 +1,6 @@
+id,title,year,genre,rating,votes,watched,tags,created_at
+1,Inception,2010,Sci-Fi,8.8,3,True,"[""['classic', 'oscar']""]",2025-12-13T22:00:00+03:00
+2,Interstellar,2014,Sci-Fi,8.6,4,True,"[""['classic', 'nobel']""]",2025-08-13T22:00:00+03:00
+3,The Dark Knight,2008,Action,9.0,1,False,"[""['oscar', 'nobel']""]",2025-12-13T22:00:00+03:00
+4,Parasite,2019,Drama,8.6,2,False,"[""['classic', 'oscar']""]",2025-11-13T22:00:00+03:00
+5,Gladiator,2000,Action,8.5,2,False,"[""['classic', 'oscar']""]",2025-10-13T22:00:00+03:00
